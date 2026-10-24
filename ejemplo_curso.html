@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!-- 1. DOCTYPE: le dice al navegador que este es un documento HTML5 -->
+<html lang="es">
+
+<!-- 2. HEAD: información sobre la página (no se ve directamente) -->
+<head>
+  <meta charset="UTF-8">                                   <!-- Permite acentos y ñ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Se adapta a celulares -->
+  <title>Mi primera página HTML</title>                    <!-- Texto de la pestaña -->
+
+  <!-- 3. CSS: aquí se define el estilo (colores, tamaños, márgenes) -->
+  <style>
+    /* Variables de color para reutilizarlas */
+    :root {
+      --primario: #2563eb;
+      --fondo: #f8fafc;
+      --texto: #1e293b;
+      --borde: #cbd5e1;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--fondo);
+      color: var(--texto);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primario);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover { text-decoration: underline; }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    section {
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    h2 { color: var(--primario); margin-top: 0; }
+
+    /* Tarjetas en cuadrícula (CSS Grid) */
+    .tarjetas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .tarjeta {
+      border: 1px solid var(--borde);
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .tarjeta:hover { transform: translateY(-4px); }
+    .tarjeta .emoji { font-size: 40px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid var(--borde);
+      padding: 8px;
+      text-align: left;
+    }
+    th { background: var(--primario); color: white; }
+    tr:nth-child(even) { background: #f1f5f9; }
+
+    form label { display: block; margin-top: 10px; font-weight: bold; }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid var(--borde);
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+
+    button {
+      background: var(--primario);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 12px;
+      font-size: 15px;
+    }
+    button:hover { opacity: 0.9; }
+
+    #contador { font-size: 32px; font-weight: bold; color: var(--primario); }
+
+    .mensaje {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      background: #dcfce7;
+      color: #166534;
+      display: none;   /* Oculto hasta que JavaScript lo muestre */
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<!-- 4. BODY: todo lo que se ve en la página -->
+<body>
+
+  <!-- ENCABEZADO -->
+  <header>
+    <h1>Curso de HTML: Página de ejemplo</h1>
+    <p>Aquí verás los elementos más usados en una página web</p>
+    <!-- Menú de navegación: los enlaces con # llevan a una sección de la misma página -->
+    <nav>
+      <a href="#texto">Texto</a>
+      <a href="#listas">Listas</a>
+      <a href="#tabla">Tabla</a>
+      <a href="#formulario">Formulario</a>
+      <a href="#interactivo">JavaScript</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- SECCIÓN 1: TEXTO -->
+    <section id="texto">
+      <h2>1. Etiquetas de texto</h2>
+      <p>Este es un <strong>párrafo</strong>. Puedo poner texto en <strong>negritas</strong>,
+         en <em>cursiva</em>, <mark>resaltado</mark> o <u>subrayado</u>.</p>
+      <p>Así se hace un enlace: <a href="https://developer.mozilla.org/es/" target="_blank">Documentación de MDN</a>.</p>
+      <blockquote>“Una cita se escribe con la etiqueta blockquote.”</blockquote>
+      <p>Y así se muestra código: <code>&lt;p&gt;Hola&lt;/p&gt;</code></p>
+    </section>
+
+    <!-- SECCIÓN 2: LISTAS Y TARJETAS -->
+    <section id="listas">
+      <h2>2. Listas</h2>
+      <h3>Lista sin orden (ul)</h3>
+      <ul>
+        <li>HTML: la estructura</li>
+        <li>CSS: el diseño</li>
+        <li>JavaScript: la interacción</li>
+      </ul>
+
+      <h3>Lista ordenada (ol)</h3>
+      <ol>
+        <li>Crear el archivo <code>index.html</code></li>
+        <li>Escribir el código</li>
+        <li>Abrirlo en el navegador</li>
+      </ol>
+
+      <h3>Tarjetas (div + CSS Grid)</h3>
+      <div class="tarjetas">
+        <div class="tarjeta"><div class="emoji">🧱</div><h4>HTML</h4><p>Los ladrillos de la página</p></div>
+        <div class="tarjeta"><div class="emoji">🎨</div><h4>CSS</h4><p>La pintura y decoración</p></div>
+        <div class="tarjeta"><div class="emoji">⚙️</div><h4>JavaScript</h4><p>La electricidad que la hace funcionar</p></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: TABLA -->
+    <section id="tabla">
+      <h2>3. Tabla</h2>
+      <table>
+        <thead>
+          <tr><th>Etiqueta</th><th>Para qué sirve</th><th>Ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>&lt;h1&gt; – &lt;h6&gt;</td><td>Títulos</td><td>&lt;h1&gt;Título&lt;/h1&gt;</td></tr>
+          <tr><td>&lt;p&gt;</td><td>Párrafos</td><td>&lt;p&gt;Texto&lt;/p&gt;</td></tr>
+          <tr><td>&lt;a&gt;</td><td>Enlaces</td><td>&lt;a href="..."&gt;Ir&lt;/a&gt;</td></tr>
+          <tr><td>&lt;img&gt;</td><td>Imágenes</td><td>&lt;img src="foto.jpg" alt="..."&gt;</td></tr>
+          <tr><td>&lt;div&gt;</td><td>Contenedor genérico</td><td>&lt;div&gt;...&lt;/div&gt;</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECCIÓN 4: FORMULARIO -->
+    <section id="formulario">
+      <h2>4. Formulario</h2>
+      <form id="miFormulario">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" placeholder="Escribe tu nombre" required>
+
+        <label for="correo">Correo</label>
+        <input type="email" id="correo" placeholder="tucorreo@ejemplo.com" required>
+
+        <label for="nivel">Nivel en HTML</label>
+        <select id="nivel">
+          <option>Principiante</option>
+          <option>Intermedio</option>
+          <option>Avanzado</option>
+        </select>
+
+        <label for="comentario">Comentario</label>
+        <textarea id="comentario" rows="3" placeholder="¿Qué te gustaría aprender?"></textarea>
+
+        <button type="submit">Enviar</button>
+        <div class="mensaje" id="mensaje"></div>
+      </form>
+    </section>
+
+    <!-- SECCIÓN 5: JAVASCRIPT -->
+    <section id="interactivo">
+      <h2>5. Interactividad con JavaScript</h2>
+      <p>Contador de clics:</p>
+      <div id="contador">0</div>
+      <button onclick="sumar()">➕ Sumar</button>
+      <button onclick="reiniciar()">🔄 Reiniciar</button>
+
+      <p style="margin-top:20px;">Cambiar el color del encabezado:</p>
+      <button onclick="cambiarColor()">🎨 Color aleatorio</button>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 · Página de ejemplo para el curso de HTML</p>
+  </footer>
+
+  <!-- 5. JAVASCRIPT: va al final para que la página cargue primero -->
+  <script>
+    // --- Contador ---
+    let cuenta = 0;
+    function sumar() {
+      cuenta++;
+      document.getElementById("contador").textContent = cuenta;
+    }
+    function reiniciar() {
+      cuenta = 0;
+      document.getElementById("contador").textContent = cuenta;
+    }
+
+    // --- Color aleatorio del encabezado ---
+    function cambiarColor() {
+      const colores = ["#2563eb", "#16a34a", "#dc2626", "#9333ea", "#ea580c", "#0891b2"];
+      const aleatorio = colores[Math.floor(Math.random() * colores.length)];
+      document.querySelector("header").style.background = aleatorio;
+    }
+
+    // --- Formulario: mostrar mensaje sin recargar la página ---
+    document.getElementById("miFormulario").addEventListener("submit", function (e) {
+      e.preventDefault(); // Evita que la página se recargue
+      const nombre = document.getElementById("nombre").value;
+      const nivel = document.getElementById("nivel").value;
+      const mensaje = document.getElementById("mensaje");
+      mensaje.textContent = "¡Gracias, " + nombre + "! Registramos tu nivel: " + nivel + ".";
+      mensaje.style.display = "block";
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>
